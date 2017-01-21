@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package memoryblock;
+package course6205.memoryblock;
 
 import java.util.ArrayList;
 import static java.lang.Math.pow;
