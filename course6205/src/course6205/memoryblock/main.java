@@ -17,10 +17,14 @@ public class main {
     public static void main(String[] args) {
 
         MemoryPool memoryPool = MemoryPool.getInstance();
-        memoryPool.initBlock();
-        System.out.println("*****************");
+        BlockList list = memoryPool.initBlock();
+        list.printList();
+        list.size();
+//        memoryPool.sortBlock();
+        list.sortBlock();
+        list.setAddress();
 
-        memoryPool.sortBlock();
+        list.printList();
 
     }
 
