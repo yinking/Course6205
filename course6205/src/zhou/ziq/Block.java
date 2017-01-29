@@ -3,9 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package zhou.ziq;
-
-import course6205.memoryblock.*;
+package course6205.memoryblock;
 
 /**
  *
