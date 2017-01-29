@@ -12,17 +12,23 @@ package zhou.ziq;
 public class main {
     public static void main(String[] args){
         memoryPool mp = new memoryPool();
-        
+        Block mphead = mp.getHead();
         
         for(int i=0;i<(int)(1+(Math.random()*100));i++){
             //随机生成100块
             int j = (int)(1+(Math.random()*10));//大小为[2^1,2^10]
-            mp.addBlock(i);
+            mp.addBlock(j);
         }
         
-        Block mphead = mp.getHead();
+        
         System.out.println("*****************************************************");
-        System.out.println(mphead.next.size);
-        System.out.println(mphead.next.next.size);
+        Block f;
+        while(mphead.next!=null){
+            f=mphead.next;
+            System.out.println(f.size);
+            f=f.next;
+
+        }
+    
     }
 }
