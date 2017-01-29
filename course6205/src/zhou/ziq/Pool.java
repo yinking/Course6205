@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package course6205.memoryblock;
+package zhou.ziq;
 
 import java.util.ArrayList;
 import static java.lang.Math.pow;
@@ -16,12 +16,12 @@ import java.util.Random;
  *
  * @author GladysWang
  */
-public class MemoryPool {
+public class Pool {
 
-    private static MemoryPool memoryPool;
+    private static Pool memoryPool;
 
-    public static MemoryPool getInstance() {
-        memoryPool = new MemoryPool();
+    public static Pool getInstance() {
+        memoryPool = new Pool();
         return memoryPool;
     }
 

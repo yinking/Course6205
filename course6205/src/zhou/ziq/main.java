@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package course6205.memoryblock;
+package zhou.ziq;
 
 /**
  *
@@ -16,7 +16,7 @@ public class main {
      */
     public static void main(String[] args) {
 
-        MemoryPool memoryPool = MemoryPool.getInstance();
+        Pool memoryPool = Pool.getInstance();
         BlockList list = memoryPool.initBlock();
         list.printList();
         list.size();
