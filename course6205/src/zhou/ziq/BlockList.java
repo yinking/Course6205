@@ -67,7 +67,6 @@ public class BlockList {
         int sum = 0;
         while (currentBlock != null) {
             currentBlock.setAddress(sum);
-
             int size = currentBlock.getSize();
             sum += size;
 
