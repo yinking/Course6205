@@ -11,7 +11,7 @@ package course6205.memoryblock;
  */
 public class Block {
     //make it to fit linkedlist
-    private Double size;
+    private int size;
     private int address;//start with zero,next address should add size of previous one
     protected Block nextBlock=null;
     boolean available=true;
@@ -35,11 +35,11 @@ public class Block {
         this.nextBlock = nextBlock;
     }
 
-    public Double getSize() {
+    public int getSize() {
         return size;
     }
 
-    public void setSize(Double size) {
+    public void setSize(int size) {
         this.size = size;
     }
 

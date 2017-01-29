@@ -28,19 +28,41 @@ public class MemoryPool {
     public BlockList initBlock() { //ramdom generate different blocks
         //size should be 2, 4, 8, 16 a single power of 2
         BlockList list = new BlockList();
-     
-        Random random = new Random();
-        for (int i = 0; i < 10; i++) {
-            int num = random.nextInt(5)+1;
 
-           Block block = new Block();
-            block.setSize(pow(2, num));
+        Random random = new Random();
+        for (int i = 0; i < 100; i++) {
+            int num = random.nextInt(7) + 1;
+
+            Block block = new Block();
+            Double value = pow(2, num);
+            block.setSize(value.intValue());
             list.insert(block);
         }
         return list;
 
     }
 
-    
+    public void randomRequestBlock(BlockList list, int requestTimes) {
+        Random random = new Random();
+        for (int i = 0; i < requestTimes; i++) {
+            int num = random.nextInt(128) + 1;
+            System.out.println("-------------" + num);
+            Block current = list.head;
+            while (current.nextBlock != null) {
+                
+                if (num <= current.getSize()) {
+                    if (current.available) {
+                        current.available = false;
+                        break;
+
+                    }
+                }
+                current=current.nextBlock;
+
+            }
+
+        }
+
+    }
 
 }

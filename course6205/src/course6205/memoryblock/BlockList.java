@@ -11,38 +11,38 @@ package course6205.memoryblock;
  */
 public class BlockList {
 
-    private Block first;
+   protected Block head;
 
     //LinkList constructor
     public BlockList() {
-        first = null;
+        head = null;
     }
 
     //Returns true if list is empty
     public boolean isEmpty() {
-        return first == null;
+        return head == null;
     }
 
-    //Inserts a new Link at the first of the list
+    //Inserts a new Link at the head of the list
     public void insert(Block block) {
-        block.nextBlock = first;
-        first = block;
+        block.nextBlock = head;
+        head = block;
     }
 
-    //Deletes the link at the first of the list
+    //Deletes the link at the head of the list
     public Block delete() {
-        Block temp = first;
-        first = first.nextBlock;
+        Block temp = head;
+        head = head.nextBlock;
         return temp;
     }
 
     public int size() {
-        if (first == null) {
+        if (head == null) {
             return 0;
         }
         int count = 1;
 
-        Block tempBlock = first;
+        Block tempBlock = head;
         while (tempBlock.nextBlock != null) {
             tempBlock = tempBlock.nextBlock;
             count++;
@@ -53,7 +53,7 @@ public class BlockList {
 
     //Prints list data
     public void printList() {
-        Block currentBlock = first;
+        Block currentBlock = head;
         System.out.print("List: \n");
         while (currentBlock != null) {
             currentBlock.printLink();
@@ -63,12 +63,12 @@ public class BlockList {
     }
 
     public void setAddress() {
-        Block currentBlock = first;
+        Block currentBlock = head;
         int sum = 0;
         while (currentBlock != null) {
             currentBlock.setAddress(sum);
 
-            int size = currentBlock.getSize().intValue();
+            int size = currentBlock.getSize();
             sum += size;
 
             currentBlock = currentBlock.nextBlock;
@@ -79,8 +79,8 @@ public class BlockList {
     public void sortBlock() { //blocksize from lowest to highest
         int i, j;
         Block pre, next;
-        Double temp;
-        for (i = 0, pre = first; i < size() - 1; i++, pre = pre.nextBlock) {
+        int temp;
+        for (i = 0, pre = head; i < size() - 1; i++, pre = pre.nextBlock) {
             for (j = i + 1, next = pre.nextBlock; j < size(); j++, next = next.nextBlock) {
                 if (pre.getSize() > next.getSize()) {
                     temp = pre.getSize();

@@ -20,9 +20,11 @@ public class main {
         BlockList list = memoryPool.initBlock();
         list.printList();
         list.size();
-//        memoryPool.sortBlock();
         list.sortBlock();
         list.setAddress();
+        list.printList();
+        
+        memoryPool.randomRequestBlock(list, 5);
 
         list.printList();
 
