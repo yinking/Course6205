@@ -30,7 +30,7 @@ public class MemoryPool {
         BlockList list = new BlockList();
 
         Random random = new Random();
-        for (int i = 0; i < 100; i++) {
+        for (int i = 0; i < 5; i++) {
             int num = random.nextInt(7) + 1;
 
             Block block = new Block();
