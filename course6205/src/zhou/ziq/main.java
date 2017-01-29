@@ -27,7 +27,8 @@ public class main {
         memoryPool.randomRequestBlock(list, 5);
 
         list.printList();
-
+        
+        System.out.println("zhou.ziq.main.main()");
     }
 
 }
