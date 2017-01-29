@@ -91,5 +91,20 @@ public class BlockList {
         }
 
     }
+    
+    public int merge(double requestSize){
+        double sum =0;
+        Block temp = head;
+        while(!temp.nextBlock.available){
+            temp = temp.nextBlock;
+        }
+        temp=temp.nextBlock;
+        while(sum<requestSize){
+            sum +=temp.getSize();
+            temp.setAvailable(false);
+            temp=temp.nextBlock;
+        }
+        return temp.getAddress();
+    }
 
 }
