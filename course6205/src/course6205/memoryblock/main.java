@@ -24,7 +24,7 @@ public class main {
         list.setAddress();
         list.printList();
         
-        memoryPool.randomRequestBlock(list, 5);
+        memoryPool.randomRequestBlockWithoutSplit(list, 5);
 
         list.printList();
 

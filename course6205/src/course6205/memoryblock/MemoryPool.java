@@ -41,28 +41,55 @@ public class MemoryPool {
         return list;
 
     }
+//
 
-    public void randomRequestBlock(BlockList list, int requestTimes) {
+    public void randomRequestBlockWithoutSplit(BlockList list, int requestTimes) {
         Random random = new Random();
         for (int i = 0; i < requestTimes; i++) {
             int num = random.nextInt(128) + 1;
             System.out.println("-------------" + num);
             Block current = list.head;
             while (current.nextBlock != null) {
-                
+
                 if (num <= current.getSize()) {
                     if (current.available) {
                         current.available = false;
+                        current.setUsed(num);
                         break;
-
                     }
                 }
-                current=current.nextBlock;
-
+                current = current.nextBlock;
             }
 
         }
+    }
 
+    public void randomRequestBlockWithSplit(BlockList list, int requestTimes) {
+        Random random = new Random();
+        for (int i = 0; i < requestTimes; i++) {
+            int num = random.nextInt(128) + 1;
+            System.out.println("-------------" + num);
+            Block current = list.head;
+            boolean run=true;
+            while (current.nextBlock != null && run) {
+
+                if (num <= current.getSize() && current.available) {
+                    current.available = false;
+                    current.setUsed(num);
+                    run=false;
+
+                } else {
+                    current = current.nextBlock;
+
+                }
+            }
+            if (num <= current.getSize() && current.available) {
+                    current.available = false;
+                    current.setUsed(num);
+
+                } 
+
+        }
     }
 
 }

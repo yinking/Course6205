@@ -15,6 +15,15 @@ public class Block {
     private int address;//start with zero,next address should add size of previous one
     protected Block nextBlock=null;
     boolean available=true;
+    private int used;
+
+    public int getUsed() {
+        return used;
+    }
+
+    public void setUsed(int used) {
+        this.used = used;
+    }
 
     public boolean isAvailable() {
         return available;
@@ -58,6 +67,6 @@ public class Block {
    
     
     public void printLink() {
-        System.out.print("{ address:" + address + ", size:" + size + ", available:" + available +"} \n");
+        System.out.print("{ address:" + address + ", size:" + size + ", available:" + available +", used:" + used +"} \n");
     }
 }
