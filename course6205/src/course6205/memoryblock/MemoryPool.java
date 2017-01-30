@@ -49,7 +49,7 @@ public class MemoryPool {
             int num = random.nextInt(128) + 1;
             System.out.println("-------------" + num);
             Block current = list.head;
-            while (current.nextBlock != null) {
+            while (current!= null) {
 
                 if (num <= current.getSize()) {
                     if (current.available) {
@@ -71,23 +71,17 @@ public class MemoryPool {
             System.out.println("-------------" + num);
             Block current = list.head;
             boolean run=true;
-            while (current.nextBlock != null && run) {
-
+            while (current != null && run) {
                 if (num <= current.getSize() && current.available) {
                     current.available = false;
                     current.setUsed(num);
                     run=false;
-
                 } else {
                     current = current.nextBlock;
 
                 }
             }
-            if (num <= current.getSize() && current.available) {
-                    current.available = false;
-                    current.setUsed(num);
-
-                } 
+          
 
         }
     }
