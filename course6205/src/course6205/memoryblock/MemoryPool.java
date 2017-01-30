@@ -30,8 +30,8 @@ public class MemoryPool {
         BlockList list = new BlockList();
 
         Random random = new Random();
-        for (int i = 0; i < 5; i++) {
-            int num = random.nextInt(7) + 1;
+        for (int i = 0; i < 10; i++) {
+            int num = random.nextInt(7) + 3;
 
             Block block = new Block();
             Double value = pow(2, num);
@@ -49,7 +49,7 @@ public class MemoryPool {
             int num = random.nextInt(128) + 1;
             System.out.println("-------------" + num);
             Block current = list.head;
-            while (current!= null) {
+            while (current != null) {
 
                 if (num <= current.getSize()) {
                     if (current.available) {
@@ -64,26 +64,45 @@ public class MemoryPool {
         }
     }
 
+    //split the size to fit the exact size
     public void randomRequestBlockWithSplit(BlockList list, int requestTimes) {
         Random random = new Random();
         for (int i = 0; i < requestTimes; i++) {
-            int num = random.nextInt(128) + 1;
-            System.out.println("-------------" + num);
+            int requestMemorySize = random.nextInt(128) + 1;
+            System.out.println("-------------" + requestMemorySize);
             Block current = list.head;
-            boolean run=true;
-            while (current != null && run) {
-                if (num <= current.getSize() && current.available) {
+            boolean flag = true;
+            while (current != null && flag) {
+                //exact size
+                if (requestMemorySize == current.getSize() && current.available) {
                     current.available = false;
-                    current.setUsed(num);
-                    run=false;
+                    current.setUsed(requestMemorySize);
+                    flag = false;
+
+                } else if (requestMemorySize < current.getSize() && current.available) {
+                    //split the block
+                    split(current, requestMemorySize);
+                    current.available = false;
+                    flag = false;
+
                 } else {
                     current = current.nextBlock;
-
                 }
             }
-          
 
         }
+    }
+
+    private void split(Block currentBlock, int requestMemorySize) {
+        int newNodeSize = currentBlock.getSize() - requestMemorySize;
+
+        Block newBlock = new Block();
+        newBlock.setSize(newNodeSize);
+        newBlock.nextBlock = currentBlock.nextBlock;
+        currentBlock.setSize(requestMemorySize);
+        currentBlock.setUsed(requestMemorySize);
+
+        currentBlock.nextBlock = newBlock;
     }
 
 }
