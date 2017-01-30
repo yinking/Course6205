@@ -54,7 +54,7 @@ public class BlockList {
     //Prints list data
     public void printList() {
         Block currentBlock = head;
-        System.out.print("List: \n");
+        System.out.print("BlockList: \n");
         while (currentBlock != null) {
             currentBlock.printLink();
             currentBlock = currentBlock.nextBlock;

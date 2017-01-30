@@ -25,7 +25,7 @@ public class main {
         list.printList();
         
 //        memoryPool.randomRequestBlockWithoutSplit(list, 5);
-        memoryPool.randomRequestBlockWithSplit(list, 5);
+        memoryPool.randomRequestBlockWithSplit(list);
 
         list.printList();
 

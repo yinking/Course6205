@@ -65,9 +65,12 @@ public class MemoryPool {
     }
 
     //split the size to fit the exact size
-    public void randomRequestBlockWithSplit(BlockList list, int requestTimes) {
+    public void randomRequestBlockWithSplit(BlockList list) {
+        System.out.println("-----randomRequestBlockWithSplit--------");
+
         Random random = new Random();
-        for (int i = 0; i < requestTimes; i++) {
+        ArrayList<Integer> failedRequest=new ArrayList<>();
+        for (int i = 0; i < 20; i++) {
             int requestMemorySize = random.nextInt(128) + 1;
             System.out.println("-------------" + requestMemorySize);
             Block current = list.head;
@@ -89,9 +92,21 @@ public class MemoryPool {
                     current = current.nextBlock;
                 }
             }
+            //save the failed request
+            if(current==null){
+                failedRequest.add(requestMemorySize);              
+            }
 
         }
+        System.out.println("failedRequest"+failedRequest.toString());
     }
+    
+    
+    
+    
+    
+    
+    
 
     private void split(Block currentBlock, int requestMemorySize) {
         int newNodeSize = currentBlock.getSize() - requestMemorySize;
