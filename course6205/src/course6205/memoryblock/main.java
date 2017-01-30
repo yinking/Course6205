@@ -5,6 +5,9 @@
  */
 package course6205.memoryblock;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  *
  * @author GladysWang
@@ -25,10 +28,19 @@ public class main {
         list.printList();
 
 //        memoryPool.randomRequestBlockWithoutSplit(list, 5);
-        memoryPool.randomRequestBlockWithSplit(list);
+        ArrayList failedRequest = memoryPool.randomRequestBlockWithSplitReturnByFailedRequest(list);
         list.printList();
         list.sortBlockByAvai();
         list.printList();
+
+        list.mergeFragBlock();
+        list.printList();
+        System.out.println("failedRequest" + failedRequest.toString());
+        failedRequest = memoryPool.requestAfterMerge(list, failedRequest);
+        list.setAddress();
+
+        list.printList();
+
     }
 
 }

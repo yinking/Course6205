@@ -7,9 +7,7 @@ package course6205.memoryblock;
 
 import java.util.ArrayList;
 import static java.lang.Math.pow;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.LinkedList;
+import java.util.List;
 import java.util.Random;
 
 /**
@@ -30,7 +28,7 @@ public class MemoryPool {
         BlockList list = new BlockList();
 
         Random random = new Random();
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < 40; i++) {
             int num = random.nextInt(7) + 3;
 
             Block block = new Block();
@@ -65,12 +63,12 @@ public class MemoryPool {
     }
 
     //split the size to fit the exact size
-    public void randomRequestBlockWithSplit(BlockList list) {
+    public ArrayList<Integer> randomRequestBlockWithSplitReturnByFailedRequest(BlockList list) {
         System.out.println("-----randomRequestBlockWithSplit--------");
 
         Random random = new Random();
-        ArrayList<Integer> failedRequest=new ArrayList<>();
-        for (int i = 0; i < 20; i++) {
+        ArrayList<Integer> failedRequest = new ArrayList<>();
+        for (int i = 0; i < 100; i++) {
             int requestMemorySize = random.nextInt(128) + 1;
             Block current = list.head;
             boolean flag = true;
@@ -92,20 +90,45 @@ public class MemoryPool {
                 }
             }
             //save the failed request
-            if(current==null){
-                failedRequest.add(requestMemorySize);              
+            if (current == null) {
+                failedRequest.add(requestMemorySize);
             }
 
         }
-        System.out.println("failedRequest"+failedRequest.toString());
+        System.out.println("failedRequest" + failedRequest.toString());
+        return failedRequest;
     }
-    
-    
-    
-    
-    
-    
-    
+
+    public ArrayList<Integer> requestAfterMerge(BlockList list, ArrayList<Integer> failedList) {
+        System.out.println("-----randomRequestBlockWithSplit--------");
+
+        Random random = new Random();
+        for (Integer requestMemorySize : failedList) {
+            Block current = list.head;
+
+            if (requestMemorySize == current.getSize() && current.available) {//exact size
+                current.available = false;
+                current.setUsed(requestMemorySize);
+                failedList.remove(requestMemorySize);
+                System.out.println("success of requset---"+requestMemorySize);
+                break;
+
+            } else if (requestMemorySize < current.getSize() && current.available) {//need split
+                //split the block
+                split(current, requestMemorySize);
+                current.available = false;
+                failedList.remove(requestMemorySize);
+                System.out.println("success of requset---"+requestMemorySize);
+                break;
+
+            } else {
+                System.out.println("failed even after merge----"+requestMemorySize);
+            }
+
+        }
+        System.out.println("LeftFailedRequest" + failedList.toString());
+        return failedList;
+    }
 
     private void split(Block currentBlock, int requestMemorySize) {
         int newNodeSize = currentBlock.getSize() - requestMemorySize;

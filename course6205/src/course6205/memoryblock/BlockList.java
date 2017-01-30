@@ -108,21 +108,19 @@ public class BlockList {
         head = newHead;
     }
 
-//    public void sort(Block headNode, int size) { //blocksize from lowest to highest
-//        int i, j;
-//        Block pre, next;
-//        int temp;
-//        for (i = 0, pre = headNode; i < size - 1; i++, pre = pre.nextBlock) {
-//            for (j = i + 1, next = pre.nextBlock; j < size(); j++, next = next.nextBlock) {
-//                if (pre.getSize() > next.getSize()) {
-//                    temp = pre.getSize();
-//                    pre.setSize(next.getSize());
-//                    next.setSize(temp);
-//                }
-//            }
-//        }
-//
-//    }
+    public void mergeFragBlock() {
+        Block current = head;
+        int mergeSize = 0;
+        while ( (current.available)) {
+            mergeSize += current.getSize();
+            System.out.println("available:"+mergeSize);
+            current=current.nextBlock;
+        }
+        
+        head.nextBlock=current;
+        head.setSize(mergeSize);
+    }
+
     public void sortBlock() { //blocksize from lowest to highest
         int i, j;
         Block pre, next;
