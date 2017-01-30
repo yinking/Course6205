@@ -1,4 +1,4 @@
- /*
+/*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
@@ -11,7 +11,7 @@ package course6205.memoryblock;
  */
 public class BlockList {
 
-   protected Block head;
+    protected Block head;
 
     //LinkList constructor
     public BlockList() {
@@ -76,6 +76,53 @@ public class BlockList {
         }
     }
 
+    public void sortBlockByAvai() {
+        System.out.println("------Availablity-------");
+
+        Block newHead = null;
+        Block current = head;
+        Block temp = null;
+        while (current != null) {
+            if (current.available == false) {
+                temp = new Block();
+                temp.setSize(current.getSize());
+                temp.available = current.available;
+                temp.nextBlock = newHead;
+                newHead = temp;
+            }
+            current = current.nextBlock;
+        }
+        current = head;
+        while (current != null) {
+            if (current.available) {
+                temp = new Block();
+                temp.setSize(current.getSize());
+                temp.available = current.available;
+
+                temp.nextBlock = newHead;
+                newHead = temp;
+            }
+            current = current.nextBlock;
+
+        }
+        head = newHead;
+    }
+
+//    public void sort(Block headNode, int size) { //blocksize from lowest to highest
+//        int i, j;
+//        Block pre, next;
+//        int temp;
+//        for (i = 0, pre = headNode; i < size - 1; i++, pre = pre.nextBlock) {
+//            for (j = i + 1, next = pre.nextBlock; j < size(); j++, next = next.nextBlock) {
+//                if (pre.getSize() > next.getSize()) {
+//                    temp = pre.getSize();
+//                    pre.setSize(next.getSize());
+//                    next.setSize(temp);
+//                }
+//            }
+//        }
+//
+//    }
     public void sortBlock() { //blocksize from lowest to highest
         int i, j;
         Block pre, next;

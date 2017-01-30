@@ -23,12 +23,12 @@ public class main {
         list.sortBlock();
         list.setAddress();
         list.printList();
-        
+
 //        memoryPool.randomRequestBlockWithoutSplit(list, 5);
         memoryPool.randomRequestBlockWithSplit(list);
-
         list.printList();
-
+        list.sortBlockByAvai();
+        list.printList();
     }
 
 }

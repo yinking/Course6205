@@ -72,7 +72,6 @@ public class MemoryPool {
         ArrayList<Integer> failedRequest=new ArrayList<>();
         for (int i = 0; i < 20; i++) {
             int requestMemorySize = random.nextInt(128) + 1;
-            System.out.println("-------------" + requestMemorySize);
             Block current = list.head;
             boolean flag = true;
             while (current != null && flag) {
