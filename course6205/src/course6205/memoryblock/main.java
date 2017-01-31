@@ -29,11 +29,15 @@ public class main {
 
 //        memoryPool.randomRequestBlockWithoutSplit(list, 5);
         ArrayList failedRequest = memoryPool.randomRequestBlockWithSplitReturnByFailedRequest(list);
-        list.printList();
+        list.printListUsed();
         list.sortBlockByAvai();
+        list.setAddress();
+
         list.printList();
 
         list.mergeFragBlock();
+        list.setAddress();
+
         list.printList();
         System.out.println("failedRequest" + failedRequest.toString());
         failedRequest = memoryPool.requestAfterMerge(list, failedRequest);

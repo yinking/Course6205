@@ -52,6 +52,17 @@ public class BlockList {
     }
 
     //Prints list data
+    public void printListUsed() {
+        Block currentBlock = head;
+        System.out.print("BlockList: \n");
+        while (currentBlock != null) {
+            currentBlock.printLinkWithUsed();
+            currentBlock = currentBlock.nextBlock;
+        }
+        System.out.println("");
+    }
+    //Prints list data
+
     public void printList() {
         Block currentBlock = head;
         System.out.print("BlockList: \n");
@@ -111,13 +122,13 @@ public class BlockList {
     public void mergeFragBlock() {
         Block current = head;
         int mergeSize = 0;
-        while ( (current.available)) {
+        while ((current.available)) {
             mergeSize += current.getSize();
-            System.out.println("available:"+mergeSize);
-            current=current.nextBlock;
+            System.out.println("available:" + mergeSize);
+            current = current.nextBlock;
         }
-        
-        head.nextBlock=current;
+
+        head.nextBlock = current;
         head.setSize(mergeSize);
     }
 
