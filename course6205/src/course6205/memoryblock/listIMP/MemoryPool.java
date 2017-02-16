@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package course6205.memoryblock;
+package course6205.memoryblock.listIMP;
 
 import java.util.ArrayList;
 import static java.lang.Math.pow;
@@ -28,7 +28,7 @@ public class MemoryPool {
         BlockList list = new BlockList();
 
         Random random = new Random();
-        for (int i = 0; i < 40; i++) {
+        for (int i = 0; i < 400; i++) {
             int num = random.nextInt(7) + 3;
 
             Block block = new Block();
@@ -68,7 +68,7 @@ public class MemoryPool {
 
         Random random = new Random();
         ArrayList<Integer> failedRequest = new ArrayList<>();
-        for (int i = 0; i < 100; i++) {
+        for (int i = 0; i < 1000; i++) {
             int requestMemorySize = random.nextInt(128) + 1;
             Block current = list.head;
             boolean flag = true;
