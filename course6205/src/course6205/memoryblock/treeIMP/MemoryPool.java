@@ -5,6 +5,7 @@
  */
 package course6205.memoryblock.treeIMP;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 /**
@@ -13,26 +14,35 @@ import java.util.Random;
  */
 public class MemoryPool {
 
-    public void showMemoryBlocksInPreOrder() {
-        BlockBT mp = new BlockBT();
-        mp.printTreeInPreOrder();
+    private static MemoryPool memoryPool;
+    private static BlockBT bbt;
+
+    public static MemoryPool getInstance() {
+        memoryPool = new MemoryPool();
+        return memoryPool;
+    }
+
+    public void showMemoryBlocks() {
+        bbt = new BlockBT();
+        bbt.levelOrderTraversalSetAddress(6);
 
     }
 
-    public void showRequest() {
+    public ArrayList<Integer> generateRequest() {
+        ArrayList<Integer> list = new ArrayList<>();
         Random random = new Random();
         for (int i = 1; i <= 8; i++) {
             int num = random.nextInt(64) + 1;
-            System.out.print(num+" ");
+            System.out.print(num + " ");
+            list.add(i);
         }
+        return list;
     }
     
-    
-    
-    
-    
-    
-    
+    public void requestMemoryBlock(ArrayList<Integer> list){
+        bbt.depthOrderRequest(list);
+        bbt.levelOrderTraversalLayer();
+    }
     
     
 

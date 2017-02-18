@@ -11,14 +11,19 @@ package course6205.memoryblock.treeIMP;
  */
 public class BTNode {
 
-    int data;
+    int size;
+    int address;
     BTNode lChild;
     BTNode rChild;
-    Boolean occupied;
+    BTNode parent;
+    Boolean occupied = false;
+    int used;
+
     public BTNode(int n) {
         lChild = null;
         rChild = null;
-        data = n;
+        parent = null;
+        size = n;
     }
 
     public BTNode() {
@@ -27,11 +32,11 @@ public class BTNode {
     }
 
     public int getData() {
-        return data;
+        return size;
     }
 
     public void setData(int data) {
-        this.data = data;
+        this.size = data;
     }
 
     public BTNode getlChild() {
@@ -48,6 +53,17 @@ public class BTNode {
 
     public void setrChild(BTNode rChild) {
         this.rChild = rChild;
+    }
+
+    @Override
+    public String toString() {
+        return "BTNode{" + "size=" + size + ", address=" + address + ", occupied=" + occupied + ", used=" + used + '}';
+//        return "BTNode{" + size   + '}';
+//        return "BTNode{" + "data=" + size + ", address=" + address + '}';
+    }
+
+    public String toStringSizeAddress() {
+        return "BTNode{" + "size=" + size + ", address=" + address + '}';
     }
 
 }
