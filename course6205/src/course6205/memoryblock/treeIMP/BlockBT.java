@@ -21,7 +21,7 @@ public class BlockBT {
     /* Constructor */
     public BlockBT() {
 //        root = createMemoryTree(1, 6);
-        depth = 8;
+        depth = 10;
         root = createMemoryTree(1, depth, root);
     }
 
@@ -180,6 +180,9 @@ public class BlockBT {
         } else if (128 < requestSize && requestSize <= 512) {
 
             return 512;
+        } else if (512 < requestSize && requestSize <= 1024) {
+
+            return 1024;
         }
         return 0;
     }

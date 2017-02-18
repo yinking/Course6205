@@ -31,8 +31,8 @@ public class TreeMain {
         Random random = new Random();
         System.out.println("*Requests are:*");
         int totalRquest = 0;
-        for (int i = 1; i <= 8; i++) {
-            int num = random.nextInt(64) + 1;
+        for (int i = 1; i <= 20; i++) {
+            int num = random.nextInt(256) + 1;
             System.out.print(num + " ");
             list.add(num);
             totalRquest += num;
