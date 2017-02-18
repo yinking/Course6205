@@ -16,11 +16,13 @@ import java.util.ArrayList;
 public class BlockBT {
 
     private BTNode root;
+    int depth;
 
     /* Constructor */
     public BlockBT() {
 //        root = createMemoryTree(1, 6);
-        root = createMemoryTree(1, 6, root);
+        depth = 8;
+        root = createMemoryTree(1, depth, root);
     }
 
     /* Function to check if tree is empty */
@@ -110,23 +112,25 @@ public class BlockBT {
             while (stack.isEmpty() == false) {
                 BTNode node = stack.pop(); //每次出来一个都进去两个.
                 int requestBlockSize = getRequestBlockSize(request);
-                if (node.size == requestBlockSize) {
+                if (node.size == requestBlockSize && !node.occupied) {
                     node.occupied = true;
                     node.used = request;
 //                    //need to set all its parents unvailable
-//                    BTNode temp = node.parent;
-//                    while (temp != null) {
-//                        temp.occupied = true;
-//                        temp = temp.parent;
-//
-//                    }
+                    BTNode temp = node.parent;
+                    while (temp != null) {
+                        temp.occupied = true;
+                        temp = temp.parent;
+
+                    }
+                    setAllChildrenUnavail(node);
+
                     flag = false;
                     break;
                 }
-                if (node.rChild != null && !node.rChild.occupied) {
+                if (node.rChild != null) {
                     stack.push(node.rChild);
                 }
-                if (node.lChild != null && !node.lChild.occupied) {
+                if (node.lChild != null) {
                     stack.push(node.lChild);
                 }
             }
@@ -135,9 +139,20 @@ public class BlockBT {
                 failedRequest.add(request);
             }
         }
-        System.out.println("**" + failedRequest.toString());
+        System.out.println("*The failed request are*" + failedRequest.toString());
         return failedRequest;
 
+    }
+
+    private void setAllChildrenUnavail(BTNode node) {
+        if (node.lChild != null) {
+            node.occupied = true;
+            setAllChildrenUnavail(node.lChild);
+        }
+        if (node.rChild != null) {
+            node.occupied = true;
+            setAllChildrenUnavail(node.rChild);
+        }
     }
 
     private int getRequestBlockSize(int requestSize) {
@@ -159,6 +174,12 @@ public class BlockBT {
         } else if (32 < requestSize && requestSize <= 64) {
 
             return 64;
+        } else if (64 < requestSize && requestSize <= 128) {
+
+            return 128;
+        } else if (128 < requestSize && requestSize <= 512) {
+
+            return 512;
         }
         return 0;
     }
@@ -179,10 +200,7 @@ public class BlockBT {
 
             }
             BTNode node = queue.remove();
-            if (queue.size() == 2) {
-                System.out.println("---------parent:--------------" + node.parent.size);
 
-            }
             System.out.print(node + "    ");
             if (node.lChild != null) {
                 queue.add(node.lChild);
@@ -194,7 +212,7 @@ public class BlockBT {
         System.out.print("\n");
     }
 
-    public void levelOrderTraversalSetAddress(int depth) {
+    public void levelOrderTraversalSetAddress() {
         if (root == null) {
             System.out.println("empty tree");
             return;
@@ -250,7 +268,10 @@ public class BlockBT {
         System.out.print("\n");
     }
 
+    int usedSpace = 0;
+
     private void preTraverseBTree(BTNode p) {
+        usedSpace += p.used;
         if (p != null) {
             if (p.lChild != null) {
                 preTraverseBTree(p.lChild);
@@ -262,9 +283,13 @@ public class BlockBT {
         }
     }
 
-    public void printTreeInPreOrder() {
+    public void printTotalUsed() {
         preTraverseBTree(root);
-        System.out.println("");
+        System.out.println("Total used:" + usedSpace);
     }
 
+    public void printDefragment() {
+        int defragment = (int) (pow(2, depth) - usedSpace);
+        System.out.println("Total defragment:" + defragment);
+    }
 }

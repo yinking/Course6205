@@ -24,17 +24,35 @@ public class TreeMain {
 //        pool.showMemoryBlocks();
 //        pool.requestMemoryBlock(pool.generateRequest());
         BlockBT bbt = new BlockBT();
+        //address
+        bbt.levelOrderTraversalSetAddress();
+        //generate request
         ArrayList<Integer> list = new ArrayList<>();
         Random random = new Random();
+        System.out.println("*Requests are:*");
+        int totalRquest = 0;
         for (int i = 1; i <= 8; i++) {
             int num = random.nextInt(64) + 1;
             System.out.print(num + " ");
             list.add(num);
+            totalRquest += num;
         }
-        System.out.println("************************* ");
-        bbt.depthOrderRequest(list);
-        bbt.levelOrderTraversalLayer();
         System.out.println("");
+        System.out.println("************************* ");
+
+        System.out.println("totalRequest:" + totalRquest);
+        System.out.println("************************* ");
+        //request
+        ArrayList<Integer> failedOnes = bbt.depthOrderRequest(list);
+        for (Integer request : failedOnes) {
+            totalRquest -= request;
+        }
+        System.out.println("total Suceess Request:" + totalRquest);
+        bbt.levelOrderTraversalLayer();
+        //calculate defragment
+        bbt.printTotalUsed();
+        System.out.println("");
+        bbt.printDefragment();
 
     }
 

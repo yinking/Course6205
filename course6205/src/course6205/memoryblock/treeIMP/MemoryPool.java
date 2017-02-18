@@ -24,7 +24,7 @@ public class MemoryPool {
 
     public void showMemoryBlocks() {
         bbt = new BlockBT();
-        bbt.levelOrderTraversalSetAddress(6);
+        bbt.levelOrderTraversalSetAddress();
 
     }
 
@@ -38,12 +38,10 @@ public class MemoryPool {
         }
         return list;
     }
-    
-    public void requestMemoryBlock(ArrayList<Integer> list){
+
+    public void requestMemoryBlock(ArrayList<Integer> list) {
         bbt.depthOrderRequest(list);
         bbt.levelOrderTraversalLayer();
     }
-    
-    
 
 }
